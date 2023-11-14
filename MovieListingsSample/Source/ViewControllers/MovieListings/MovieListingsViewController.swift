@@ -7,9 +7,21 @@
 
 import UIKit
 
-class MovieListingsViewController: UIViewController {
+class MovieListingsViewModel {
+    
+}
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+class MovieListingsViewController: UIViewController {
+    
+    private let viewModel: MovieListingsViewModel
+
+    init(with viewModel: MovieListingsViewModel) {
+        self.viewModel = viewModel
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

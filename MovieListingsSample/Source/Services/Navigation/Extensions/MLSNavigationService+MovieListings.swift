@@ -10,7 +10,8 @@ import UIKit
 extension MLSNavigationService: MovieListingsNavigationService {
 
     func displayMovieListingsViewController() {
-        let viewController = MovieListingsViewController()
+        let viewModel = MovieListingsViewModel()
+        let viewController = MovieListingsViewController(with: viewModel)
         
         window.rootViewController = viewController
         window.makeKeyAndVisible()
