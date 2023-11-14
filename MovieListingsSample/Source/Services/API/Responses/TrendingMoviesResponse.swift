@@ -10,7 +10,9 @@ import Foundation
 struct TrendingMoviesResponse: Decodable {
     struct Movie: Decodable {
         let id: Int
+        
         let title: String
+        let overview: String
         
         let posterPath: String
         let releaseDate: String

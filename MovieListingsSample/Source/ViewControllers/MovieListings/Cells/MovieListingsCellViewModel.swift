@@ -9,12 +9,7 @@ import Foundation
 
 class MovieListingsCellViewModel {
     
-    private struct Constants {
-        static let imageSize500px = "w500"
-        static let imageSizeOriginal = "original"
-    }
-
-    private let movieResponse: TrendingMoviesResponse.Movie
+    let movieResponse: TrendingMoviesResponse.Movie
     
     private var configuration: ConfigurationResponse?
     
@@ -23,8 +18,7 @@ class MovieListingsCellViewModel {
     var imagePath: String {
         guard let configuration = configuration else { return "" }
         
-        let imageSize = configuration.images.posterSizes.first(where: { $0 == Constants.imageSize500px }) ?? Constants.imageSizeOriginal
-        return "\(configuration.images.secureBaseUrl)\(imageSize)/\(movieResponse.posterPath)"
+        return ImagePathConstructor.constructFullImagePath(given: configuration, imagePath: movieResponse.posterPath)
     }
     
     init(with movieResponse: TrendingMoviesResponse.Movie, configuration: ConfigurationResponse?) {

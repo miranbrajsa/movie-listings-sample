@@ -12,3 +12,7 @@ protocol NavigationService: AnyObject {}
 protocol MovieListingsNavigationService: NavigationService {
     func displayMovieListingsViewController()
 }
+
+protocol MovieDetailsNavigationService: NavigationService {
+    func pushMovieDetailsViewController(with details: TrendingMoviesResponse.Movie, configuration: ConfigurationResponse)
+}

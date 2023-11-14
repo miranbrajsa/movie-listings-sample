@@ -15,6 +15,7 @@ class MovieListingsViewModel {
     private weak var movieListingsAPIService: MovieListingsAPIService? { apiService as? MovieListingsAPIService }
 
     private weak var navigationService: NavigationService?
+    private weak var movieDetailsNavigationService: MovieDetailsNavigationService? { navigationService as? MovieDetailsNavigationService }
 
     private var cancellables = Set<AnyCancellable>()
     
@@ -67,6 +68,11 @@ class MovieListingsViewModel {
                 self.cellViewModels.append(contentsOf: movieListings.results.map({ MovieListingsCellViewModel(with: $0, configuration: self.configuration) }))
             })
             .store(in: &cancellables)
+    }
+    
+    func pushMovieDetailsViewController(for itemAtIndex: Int) {
+        guard let configuration = configuration else { return }
+        movieDetailsNavigationService?.pushMovieDetailsViewController(with: cellViewModels[itemAtIndex].movieResponse, configuration: configuration)
     }
     
     private func attachObservers() {

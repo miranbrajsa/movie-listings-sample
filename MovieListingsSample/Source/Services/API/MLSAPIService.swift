@@ -46,7 +46,6 @@ class MLSAPIService: APIService {
                 
                 self.switchDecodingStrategy(to: decodingStrategy)
                 if (200...299).contains(response.statusCode) {
-                    print(">>> data: \(String(data: data, encoding: .utf8))")
                     return Just(data)
                         .decode(type: T.self, decoder: self.decoder)
                         .mapError { error in

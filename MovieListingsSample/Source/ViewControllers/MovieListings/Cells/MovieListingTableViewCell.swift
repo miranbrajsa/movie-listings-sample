@@ -49,7 +49,7 @@ class MovieListingTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(with viewModel: MovieListingsCellViewModel, configuration: ConfigurationResponse) {
+    func configure(with viewModel: MovieListingsCellViewModel) {
         titleLabel.text = viewModel.title
         
         backgroundImageView.sd_setImage(with: URL(string: viewModel.imagePath))
