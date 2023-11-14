@@ -10,6 +10,32 @@ import UIKit
 import SnapKit
 import SDWebImage
 
+class MovieListingsCellViewModel {
+    
+    private struct Constants {
+        static let imageSize500px = "w500"
+        static let imageSizeOriginal = "original"
+    }
+
+    private let movieResponse: TrendingMoviesResponse.Movie
+    
+    private var configuration: ConfigurationResponse?
+    
+    var title: String { movieResponse.title }
+    
+    var imagePath: String {
+        guard let configuration = configuration else { return "" }
+        
+        let imageSize = configuration.images.posterSizes.first(where: { $0 == Constants.imageSize500px }) ?? Constants.imageSizeOriginal
+        return "\(configuration.images.secureBaseUrl)\(imageSize)/\(movieResponse.posterPath)"
+    }
+    
+    init(with movieResponse: TrendingMoviesResponse.Movie, configuration: ConfigurationResponse?) {
+        self.movieResponse = movieResponse
+        self.configuration = configuration
+    }
+}
+
 class MovieListingsViewModel {
 
     private weak var apiService: APIService?
@@ -26,7 +52,7 @@ class MovieListingsViewModel {
     private var hasMoreResults: Bool { totalPages < currentPage }
     
     private(set) var configuration: ConfigurationResponse?
-    private(set) var cellModels: [TrendingMoviesResponse.Movie] = []
+    private(set) var cellViewModels: [MovieListingsCellViewModel] = []
 
     @Published private(set) var isLoadingInProgress = false
     
@@ -61,7 +87,7 @@ class MovieListingsViewModel {
             }, receiveValue: { [weak self] movieListings in
                 guard let self = self else { return }
                 self.totalPages = movieListings.totalPages
-                self.cellModels.append(contentsOf: movieListings.results)
+                self.cellViewModels.append(contentsOf: movieListings.results.map({ MovieListingsCellViewModel(with: $0, configuration: self.configuration) }))
             })
             .store(in: &cancellables)
     }
@@ -85,11 +111,6 @@ class MovieListingsViewModel {
 }
 
 class MovieListingTableViewCell: UITableViewCell {
-
-    private struct Constants {
-        static let imageSize500px = "w500"
-        static let imageSizeOriginal = "original"
-    }
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -129,18 +150,12 @@ class MovieListingTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(with model: TrendingMoviesResponse.Movie, configuration: ConfigurationResponse) {
-        titleLabel.text = model.title
+    func configure(with viewModel: MovieListingsCellViewModel, configuration: ConfigurationResponse) {
+        titleLabel.text = viewModel.title
         
-        let imagePath = constructImagePath(with: model, configuration: configuration)
-        backgroundImageView.sd_setImage(with: URL(string: imagePath))
+        backgroundImageView.sd_setImage(with: URL(string: viewModel.imagePath))
     }
     
-    private func constructImagePath(with model: TrendingMoviesResponse.Movie, configuration: ConfigurationResponse) -> String {
-        let imageSize = configuration.images.posterSizes.first(where: { $0 == Constants.imageSize500px }) ?? Constants.imageSizeOriginal
-        return "\(configuration.images.secureBaseUrl)\(imageSize)/\(model.posterPath)"
-    }
-
     private func addSubviews() {
         contentView.addSubview(containerView)
         
@@ -262,7 +277,7 @@ extension MovieListingsViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if viewModel.cellModels.count - indexPath.row < MovieListingsViewController.Constants.paginationThreshold {
+        if viewModel.cellViewModels.count - indexPath.row < MovieListingsViewController.Constants.paginationThreshold {
             viewModel.loadMoreMovies()
         }
     }
@@ -271,15 +286,15 @@ extension MovieListingsViewController: UITableViewDelegate {
 extension MovieListingsViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.cellModels.count
+        return viewModel.cellViewModels.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let configuration = viewModel.configuration else { return UITableViewCell() }
-        let cellModel = viewModel.cellModels[indexPath.row]
+        let cellViewModel = viewModel.cellViewModels[indexPath.row]
         let cell: MovieListingTableViewCell = tableView.dequeueCellAtIndexPath(indexPath: indexPath)
 
-        cell.configure(with: cellModel, configuration: configuration)
+        cell.configure(with: cellViewModel, configuration: configuration)
         return cell
     }
 }
