@@ -26,6 +26,10 @@
 		949D6A532B0380B5006F7F98 /* RappleProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 949D6A522B0380B5006F7F98 /* RappleProgressHUD */; };
 		949D6A562B0380D4006F7F98 /* ActivityIndicatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949D6A552B0380D4006F7F98 /* ActivityIndicatorViewController.swift */; };
 		949D6A582B038347006F7F98 /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949D6A572B038347006F7F98 /* UITableView+Extensions.swift */; };
+		949D6A5B2B03913B006F7F98 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 949D6A5A2B03913B006F7F98 /* SDWebImage */; };
+		949D6A5D2B03913B006F7F98 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 949D6A5C2B03913B006F7F98 /* SDWebImageMapKit */; };
+		949D6A5F2B0392C3006F7F98 /* ConfigurationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949D6A5E2B0392C3006F7F98 /* ConfigurationResponse.swift */; };
+		949D6A612B039338006F7F98 /* MLSAPIService+Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949D6A602B039338006F7F98 /* MLSAPIService+Configuration.swift */; };
 		94F1E7182B0360CF0026A0B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F1E7172B0360CF0026A0B2 /* AppDelegate.swift */; };
 		94F1E71C2B0360CF0026A0B2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F1E71B2B0360CF0026A0B2 /* ViewController.swift */; };
 		94F1E7212B0360D10026A0B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94F1E7202B0360D10026A0B2 /* Assets.xcassets */; };
@@ -49,6 +53,8 @@
 		949D6A4F2B037C8C006F7F98 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		949D6A552B0380D4006F7F98 /* ActivityIndicatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorViewController.swift; sourceTree = "<group>"; };
 		949D6A572B038347006F7F98 /* UITableView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
+		949D6A5E2B0392C3006F7F98 /* ConfigurationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationResponse.swift; sourceTree = "<group>"; };
+		949D6A602B039338006F7F98 /* MLSAPIService+Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MLSAPIService+Configuration.swift"; sourceTree = "<group>"; };
 		94F1E7142B0360CF0026A0B2 /* MovieListingsSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieListingsSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94F1E7172B0360CF0026A0B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		94F1E71B2B0360CF0026A0B2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -63,7 +69,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				949D6A4B2B037C53006F7F98 /* SnapKit in Frameworks */,
+				949D6A5D2B03913B006F7F98 /* SDWebImageMapKit in Frameworks */,
 				949D6A4D2B037C53006F7F98 /* SnapKit-Dynamic in Frameworks */,
+				949D6A5B2B03913B006F7F98 /* SDWebImage in Frameworks */,
 				949D6A532B0380B5006F7F98 /* RappleProgressHUD in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -164,6 +172,7 @@
 			children = (
 				949D6A3A2B036B9D006F7F98 /* APIService+Methods.swift */,
 				949D6A382B036B80006F7F98 /* APIService+Types.swift */,
+				949D6A602B039338006F7F98 /* MLSAPIService+Configuration.swift */,
 				949D6A422B036EEC006F7F98 /* MLSAPIService+MovieListingsAPIService.swift */,
 			);
 			path = Extensions;
@@ -172,6 +181,7 @@
 		949D6A3C2B036C38006F7F98 /* Responses */ = {
 			isa = PBXGroup;
 			children = (
+				949D6A5E2B0392C3006F7F98 /* ConfigurationResponse.swift */,
 				949D6A3D2B036C46006F7F98 /* TrendingMoviesResponse.swift */,
 			);
 			path = Responses;
@@ -247,6 +257,8 @@
 				949D6A4A2B037C53006F7F98 /* SnapKit */,
 				949D6A4C2B037C53006F7F98 /* SnapKit-Dynamic */,
 				949D6A522B0380B5006F7F98 /* RappleProgressHUD */,
+				949D6A5A2B03913B006F7F98 /* SDWebImage */,
+				949D6A5C2B03913B006F7F98 /* SDWebImageMapKit */,
 			);
 			productName = MovieListingsSample;
 			productReference = 94F1E7142B0360CF0026A0B2 /* MovieListingsSample.app */;
@@ -279,6 +291,7 @@
 			packageReferences = (
 				949D6A492B037C53006F7F98 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				949D6A512B0380B5006F7F98 /* XCRemoteSwiftPackageReference "RappleProgressHUD" */,
+				949D6A592B03913B006F7F98 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 			);
 			productRefGroup = 94F1E7152B0360CF0026A0B2 /* Products */;
 			projectDirPath = "";
@@ -314,6 +327,7 @@
 				949D6A342B0369E4006F7F98 /* PlistReaderService.swift in Sources */,
 				949D6A2E2B0364AF006F7F98 /* MovieListingsViewController.swift in Sources */,
 				949D6A362B036AFC006F7F98 /* MLSAPIService.swift in Sources */,
+				949D6A5F2B0392C3006F7F98 /* ConfigurationResponse.swift in Sources */,
 				949D6A482B0376A9006F7F98 /* PlistReaderService+Types.swift in Sources */,
 				949D6A582B038347006F7F98 /* UITableView+Extensions.swift in Sources */,
 				949D6A392B036B80006F7F98 /* APIService+Types.swift in Sources */,
@@ -322,6 +336,7 @@
 				949D6A282B0363A2006F7F98 /* MLSNavigationService.swift in Sources */,
 				949D6A252B0362CE006F7F98 /* NavigationService.swift in Sources */,
 				949D6A502B037C8C006F7F98 /* UIView+Extensions.swift in Sources */,
+				949D6A612B039338006F7F98 /* MLSAPIService+Configuration.swift in Sources */,
 				94F1E7182B0360CF0026A0B2 /* AppDelegate.swift in Sources */,
 				949D6A432B036EEC006F7F98 /* MLSAPIService+MovieListingsAPIService.swift in Sources */,
 			);
@@ -552,6 +567,14 @@
 				minimumVersion = 4.1.0;
 			};
 		};
+		949D6A592B03913B006F7F98 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.18.4;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -569,6 +592,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 949D6A512B0380B5006F7F98 /* XCRemoteSwiftPackageReference "RappleProgressHUD" */;
 			productName = RappleProgressHUD;
+		};
+		949D6A5A2B03913B006F7F98 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 949D6A592B03913B006F7F98 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+		949D6A5C2B03913B006F7F98 /* SDWebImageMapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 949D6A592B03913B006F7F98 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImageMapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

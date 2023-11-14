@@ -17,6 +17,7 @@ enum API {
     }
 
     enum GET {
+        case configuration
         case trendingMovies(page: Int)
     }
 }
@@ -25,6 +26,12 @@ extension API.GET {
         
     var url: URLComponents {
         switch self {
+        case .configuration:
+            guard let components = URLComponents(string: "\(API.Constants.baseURL)/configuration") else {
+                fatalError("Unable to construct components.")
+            }
+            return components
+
         case .trendingMovies(let page):
             guard var components = URLComponents(string: "\(API.Constants.baseURL)/discover/movie") else {
                 fatalError("Unable to construct components.")

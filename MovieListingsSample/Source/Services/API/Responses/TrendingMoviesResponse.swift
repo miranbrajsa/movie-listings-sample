@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct TrendingMoviesResponse: Codable {
-    struct Movie: Codable {
+struct TrendingMoviesResponse: Decodable {
+    struct Movie: Decodable {
         let id: Int
         let title: String
         

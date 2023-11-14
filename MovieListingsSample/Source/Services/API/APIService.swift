@@ -13,3 +13,7 @@ protocol APIService: AnyObject {}
 protocol MovieListingsAPIService: APIService {
     func getTrendingMoviesList(page: Int) -> AnyPublisher<TrendingMoviesResponse, APIError>
 }
+
+protocol ConfigurationAPIService: APIService {
+    func getConfiguration() -> AnyPublisher<ConfigurationResponse, APIError>
+}

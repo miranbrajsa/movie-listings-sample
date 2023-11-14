@@ -8,10 +8,12 @@
 import Combine
 import UIKit
 import SnapKit
+import SDWebImage
 
 class MovieListingsViewModel {
 
     private weak var apiService: APIService?
+    private weak var configurationAPIService: ConfigurationAPIService? { apiService as? ConfigurationAPIService }
     private weak var movieListingsAPIService: MovieListingsAPIService? { apiService as? MovieListingsAPIService }
 
     private weak var navigationService: NavigationService?
@@ -23,6 +25,7 @@ class MovieListingsViewModel {
     
     private var hasMoreResults: Bool { totalPages < currentPage }
     
+    private(set) var configuration: ConfigurationResponse?
     private(set) var cellModels: [TrendingMoviesResponse.Movie] = []
 
     @Published private(set) var isLoadingInProgress = false
@@ -38,10 +41,12 @@ class MovieListingsViewModel {
         loadMoreMovies()
     }
     
-    func loadMoreMovies() {
-        guard !isLoadingInProgress else { return }
+    func loadMoreMovies(forceLoad: Bool = false) {
+        if !forceLoad {
+            guard !isLoadingInProgress else { return }
+            isLoadingInProgress = true
+        }
         
-        isLoadingInProgress = true
         movieListingsAPIService?
             .getTrendingMoviesList(page: currentPage)
             .sink(receiveCompletion: { [weak self] completion in
@@ -62,14 +67,30 @@ class MovieListingsViewModel {
     }
     
     private func attachObservers() {
-        refreshMovieListings()
+        isLoadingInProgress = true
+        configurationAPIService?
+            .getConfiguration()
+            .sink(receiveCompletion: { [weak self] completion in
+                guard let self = self else { return }
+                switch completion {
+                case .finished:
+                    self.loadMoreMovies(forceLoad: true)
+                case .failure(let error):
+                    print("Error during configuration fetch: \(error)")
+                    self.isLoadingInProgress = false
+                }
+            }, receiveValue: { [weak self] in self?.configuration = $0 })
+            .store(in: &cancellables)
     }
 }
 
 class MovieListingTableViewCell: UITableViewCell {
 
-    private var model: TrendingMoviesResponse.Movie?
-
+    private struct Constants {
+        static let imageSize500px = "w500"
+        static let imageSizeOriginal = "original"
+    }
+    
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 26, weight: .semibold)
@@ -77,6 +98,18 @@ class MovieListingTableViewCell: UITableViewCell {
         return label
     }()
 
+    private lazy var overlayView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .black.withAlphaComponent(0.3)
+        return view
+    }()
+    
+    private lazy var backgroundImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        return imageView
+    }()
+    
     private lazy var containerView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 8
@@ -96,19 +129,30 @@ class MovieListingTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(with model: TrendingMoviesResponse.Movie) {
-        self.model = model
-        
+    func configure(with model: TrendingMoviesResponse.Movie, configuration: ConfigurationResponse) {
         titleLabel.text = model.title
+        
+        let imagePath = constructImagePath(with: model, configuration: configuration)
+        backgroundImageView.sd_setImage(with: URL(string: imagePath))
+    }
+    
+    private func constructImagePath(with model: TrendingMoviesResponse.Movie, configuration: ConfigurationResponse) -> String {
+        let imageSize = configuration.images.posterSizes.first(where: { $0 == Constants.imageSize500px }) ?? Constants.imageSizeOriginal
+        return "\(configuration.images.secureBaseUrl)\(imageSize)/\(model.posterPath)"
     }
 
     private func addSubviews() {
         contentView.addSubview(containerView)
         
+        containerView.addSubview(backgroundImageView)
+        containerView.addSubview(overlayView)
         containerView.addSubview(titleLabel)
     }
     
     private func setConstraints() {
+        overlayView.snapToSuperview()
+        backgroundImageView.snapToSuperview()
+
         containerView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(4)
             make.top.equalToSuperview().offset(4)
@@ -231,10 +275,11 @@ extension MovieListingsViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let configuration = viewModel.configuration else { return UITableViewCell() }
         let cellModel = viewModel.cellModels[indexPath.row]
         let cell: MovieListingTableViewCell = tableView.dequeueCellAtIndexPath(indexPath: indexPath)
 
-        cell.configure(with: cellModel)
+        cell.configure(with: cellModel, configuration: configuration)
         return cell
     }
 }
