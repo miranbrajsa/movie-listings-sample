@@ -64,13 +64,18 @@ class MovieListingsViewModel {
     }
 
     func refreshMovieListings() {
-        loadMoreMovies()
+        loadMoreMovies(shouldRefresh: true)
     }
     
-    func loadMoreMovies(forceLoad: Bool = false) {
+    func loadMoreMovies(forceLoad: Bool = false, shouldRefresh: Bool = false) {
         if !forceLoad {
             guard !isLoadingInProgress else { return }
             isLoadingInProgress = true
+        }
+        
+        if shouldRefresh {
+            currentPage = 1
+            cellViewModels.removeAll()
         }
         
         movieListingsAPIService?
@@ -264,6 +269,7 @@ class MovieListingsContentView: UIView {
 extension MovieListingsViewController: MovieListingsContentViewDelegate {
 
     func didPullToRefresh() {
+        contentView.listingsTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
         viewModel.refreshMovieListings()
     }
 }
