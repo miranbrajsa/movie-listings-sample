@@ -67,7 +67,7 @@ class MLSAPIService: APIService {
     
     private func assembleRequest(from components: URLComponents, httpMethod: HTTPMethod, httpHeaders: [HTTPHeaderData]) -> URLRequest? {
         let httpAPIKey = plistReaderService.read(.tmdbApiKey)
-        let apiKeyQueryItem = URLQueryItem(name: PlistReaderService.Item.tmdbApiKey.rawValue, value: httpAPIKey)
+        let apiKeyQueryItem = URLQueryItem(name: "api_key", value: httpAPIKey)
         
         var currentQueryItems: [URLQueryItem] = components.queryItems ?? []
         currentQueryItems.append(apiKeyQueryItem)

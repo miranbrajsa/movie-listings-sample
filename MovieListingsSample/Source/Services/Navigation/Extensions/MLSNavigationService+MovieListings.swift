@@ -10,7 +10,7 @@ import UIKit
 extension MLSNavigationService: MovieListingsNavigationService {
 
     func displayMovieListingsViewController() {
-        let viewModel = MovieListingsViewModel()
+        let viewModel = MovieListingsViewModel(with: self, apiService: apiService)
         let viewController = MovieListingsViewController(with: viewModel)
         
         window.rootViewController = viewController

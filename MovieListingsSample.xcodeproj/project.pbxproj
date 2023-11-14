@@ -18,6 +18,8 @@
 		949D6A3B2B036B9D006F7F98 /* APIService+Methods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949D6A3A2B036B9D006F7F98 /* APIService+Methods.swift */; };
 		949D6A3E2B036C46006F7F98 /* TrendingMoviesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949D6A3D2B036C46006F7F98 /* TrendingMoviesResponse.swift */; };
 		949D6A432B036EEC006F7F98 /* MLSAPIService+MovieListingsAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949D6A422B036EEC006F7F98 /* MLSAPIService+MovieListingsAPIService.swift */; };
+		949D6A452B037418006F7F98 /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 949D6A442B037418006F7F98 /* Secrets.plist */; };
+		949D6A482B0376A9006F7F98 /* PlistReaderService+Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949D6A472B0376A9006F7F98 /* PlistReaderService+Types.swift */; };
 		94F1E7182B0360CF0026A0B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F1E7172B0360CF0026A0B2 /* AppDelegate.swift */; };
 		94F1E71C2B0360CF0026A0B2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F1E71B2B0360CF0026A0B2 /* ViewController.swift */; };
 		94F1E7212B0360D10026A0B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94F1E7202B0360D10026A0B2 /* Assets.xcassets */; };
@@ -36,6 +38,8 @@
 		949D6A3A2B036B9D006F7F98 /* APIService+Methods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "APIService+Methods.swift"; sourceTree = "<group>"; };
 		949D6A3D2B036C46006F7F98 /* TrendingMoviesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingMoviesResponse.swift; sourceTree = "<group>"; };
 		949D6A422B036EEC006F7F98 /* MLSAPIService+MovieListingsAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MLSAPIService+MovieListingsAPIService.swift"; sourceTree = "<group>"; };
+		949D6A442B037418006F7F98 /* Secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
+		949D6A472B0376A9006F7F98 /* PlistReaderService+Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlistReaderService+Types.swift"; sourceTree = "<group>"; };
 		94F1E7142B0360CF0026A0B2 /* MovieListingsSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieListingsSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94F1E7172B0360CF0026A0B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		94F1E71B2B0360CF0026A0B2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -61,6 +65,7 @@
 				94F1E7202B0360D10026A0B2 /* Assets.xcassets */,
 				94F1E7222B0360D10026A0B2 /* LaunchScreen.storyboard */,
 				94F1E7252B0360D10026A0B2 /* Info.plist */,
+				949D6A442B037418006F7F98 /* Secrets.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -134,6 +139,7 @@
 		949D6A322B0369D3006F7F98 /* PlistReader */ = {
 			isa = PBXGroup;
 			children = (
+				949D6A462B03769E006F7F98 /* Extensions */,
 				949D6A332B0369E4006F7F98 /* PlistReaderService.swift */,
 			);
 			path = PlistReader;
@@ -155,6 +161,14 @@
 				949D6A3D2B036C46006F7F98 /* TrendingMoviesResponse.swift */,
 			);
 			path = Responses;
+			sourceTree = "<group>";
+		};
+		949D6A462B03769E006F7F98 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				949D6A472B0376A9006F7F98 /* PlistReaderService+Types.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		94F1E70B2B0360CF0026A0B2 = {
@@ -241,6 +255,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				94F1E7242B0360D10026A0B2 /* LaunchScreen.storyboard in Resources */,
+				949D6A452B037418006F7F98 /* Secrets.plist in Resources */,
 				94F1E7212B0360D10026A0B2 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -259,6 +274,7 @@
 				949D6A342B0369E4006F7F98 /* PlistReaderService.swift in Sources */,
 				949D6A2E2B0364AF006F7F98 /* MovieListingsViewController.swift in Sources */,
 				949D6A362B036AFC006F7F98 /* MLSAPIService.swift in Sources */,
+				949D6A482B0376A9006F7F98 /* PlistReaderService+Types.swift in Sources */,
 				949D6A392B036B80006F7F98 /* APIService+Types.swift in Sources */,
 				949D6A3E2B036C46006F7F98 /* TrendingMoviesResponse.swift in Sources */,
 				949D6A282B0363A2006F7F98 /* MLSNavigationService.swift in Sources */,

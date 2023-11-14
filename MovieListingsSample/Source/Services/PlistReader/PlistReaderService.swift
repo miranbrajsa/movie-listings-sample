@@ -10,15 +10,32 @@ import Foundation
 class PlistReaderService {
 
     enum Item: String {
-        case tmdbApiKey = "api_key"
+        case tmdbApiKey = "tmdbAPIKey"
     }
     
     private var bundle: Bundle { Bundle.main }
     
     func read(_ item: Item) -> String {
-        guard let value = bundle.object(forInfoDictionaryKey: item.rawValue) as? String else {
-            fatalError("Unexisting value")
+        switch item {
+        case .tmdbApiKey:
+            guard let secretsPlistData = loadFromSecretsPlist() else {
+                fatalError("Property list is unreadable")
+            }
+            return secretsPlistData.tmdbAPIKey
         }
-        return value
+    }
+
+    private func loadFromSecretsPlist() -> SecretsData? {
+        guard let path = Bundle.main.path(forResource: "Secrets", ofType: "plist"),
+              let plistData = FileManager.default.contents(atPath: path)
+        else { return nil }
+
+        do {
+            let decodedData = try PropertyListDecoder().decode(SecretsData.self, from: plistData)
+            return decodedData
+        } catch {
+            print("Error reading plist: \(error)")
+            return nil
+        }
     }
 }

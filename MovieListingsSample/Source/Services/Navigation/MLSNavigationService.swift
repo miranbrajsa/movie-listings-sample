@@ -11,12 +11,14 @@ class MLSNavigationService: NavigationService {
 
     let window: UIWindow
     
+    let apiService: MLSAPIService
     let plistReaderService: PlistReaderService
 
     init(with window: UIWindow) {
         self.window = window
         
         self.plistReaderService = PlistReaderService()
+        self.apiService = MLSAPIService(with: plistReaderService)
         
         displayMovieListingsViewController()
     }
