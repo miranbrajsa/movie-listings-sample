@@ -14,15 +14,10 @@ enum HTTPMethod: String {
 enum API {
     struct Constants {
         static let baseURL = "https://api.themoviedb.org/3"
-        
-        enum TimeWindow: String {
-            case day
-            case week
-        }
     }
 
     enum GET {
-        case trendingMovies(Constants.TimeWindow)
+        case trendingMovies(page: Int)
     }
 }
 
@@ -30,13 +25,15 @@ extension API.GET {
         
     var url: URLComponents {
         switch self {
-        case .trendingMovies(let timeWindow):
-            guard var components = URLComponents(string: "\(API.Constants.baseURL)/trending/movie/\(timeWindow.rawValue)") else {
+        case .trendingMovies(let page):
+            guard var components = URLComponents(string: "\(API.Constants.baseURL)/discover/movie") else {
                 fatalError("Unable to construct components.")
             }
             
             let queryItems: [URLQueryItem] = [
-                URLQueryItem(name: "language", value: "en-US")
+                URLQueryItem(name: "language", value: "en-US"),
+                URLQueryItem(name: "page", value: "\(page)"),
+                URLQueryItem(name: "sort_by", value: "popularity.desc"),
             ]
             components.queryItems = queryItems
 

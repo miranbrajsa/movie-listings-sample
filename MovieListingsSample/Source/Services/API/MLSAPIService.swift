@@ -9,12 +9,12 @@ import Foundation
 import Combine
 
 class MLSAPIService: APIService {
-
+    
     private let plistReaderService: PlistReaderService
     
     private let dateFormatter: DateFormatter
     private let decoder: JSONDecoder
-
+    
     private static let defaultHeaderData: [HTTPHeaderData] = [
         HTTPHeaderData(value: .applicationJSON, key: .contentType),
     ]
@@ -23,9 +23,6 @@ class MLSAPIService: APIService {
         self.plistReaderService = plistReaderService
         self.dateFormatter = DateFormatter()
         self.decoder = JSONDecoder()
-        
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-        decoder.dateDecodingStrategy = .formatted(dateFormatter)
     }
     
     func request<T>(with components: URLComponents,
@@ -35,7 +32,7 @@ class MLSAPIService: APIService {
     {
         guard let request = assembleRequest(from: components, httpMethod: httpMethod, httpHeaders: httpHeaders)
         else { return Fail(error: APIError.unknown).eraseToAnyPublisher() }
-
+        
         return URLSession.shared
             .dataTaskPublisher(for: request)
             .receive(on: DispatchQueue.main)
@@ -46,7 +43,8 @@ class MLSAPIService: APIService {
                 else {
                     return Fail(error: APIError.unknown).eraseToAnyPublisher()
                 }
-
+                
+                self.switchDecodingStrategy(to: decodingStrategy)
                 if (200...299).contains(response.statusCode) {
                     print(">>> data: \(String(data: data, encoding: .utf8))")
                     return Just(data)
@@ -71,18 +69,25 @@ class MLSAPIService: APIService {
         
         var currentQueryItems: [URLQueryItem] = components.queryItems ?? []
         currentQueryItems.append(apiKeyQueryItem)
-
+        
         var modifiedComponents = components
         modifiedComponents.queryItems = currentQueryItems
-
+        
         guard let url = modifiedComponents.url else { return nil }
         
         var request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 120)
         request.httpShouldHandleCookies = false
         request.httpMethod = httpMethod.rawValue
-
+        
         httpHeaders.forEach { request.addValue($0.value.rawValue, forHTTPHeaderField: $0.key.rawValue) }
         
         return request
+    }
+    
+    private func switchDecodingStrategy(to decodingStrategy: JSONDecoder.KeyDecodingStrategy) {
+        decoder.keyDecodingStrategy = decodingStrategy
+
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        decoder.dateDecodingStrategy = .formatted(dateFormatter)
     }
 }

@@ -11,5 +11,5 @@ import Foundation
 protocol APIService: AnyObject {}
 
 protocol MovieListingsAPIService: APIService {
-    func getTrendingMoviesList() -> AnyPublisher<TrendingMoviesResponse, APIError>
+    func getTrendingMoviesList(page: Int) -> AnyPublisher<TrendingMoviesResponse, APIError>
 }

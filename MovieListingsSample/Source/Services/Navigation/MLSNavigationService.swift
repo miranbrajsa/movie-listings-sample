@@ -14,12 +14,14 @@ class MLSNavigationService: NavigationService {
     let apiService: MLSAPIService
     let plistReaderService: PlistReaderService
 
+    var navigationController: UINavigationController?
+    
     init(with window: UIWindow) {
         self.window = window
         
         self.plistReaderService = PlistReaderService()
         self.apiService = MLSAPIService(with: plistReaderService)
-        
+                
         displayMovieListingsViewController()
     }
 }

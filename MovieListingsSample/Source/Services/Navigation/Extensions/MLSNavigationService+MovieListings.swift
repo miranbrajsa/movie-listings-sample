@@ -13,7 +13,9 @@ extension MLSNavigationService: MovieListingsNavigationService {
         let viewModel = MovieListingsViewModel(with: self, apiService: apiService)
         let viewController = MovieListingsViewController(with: viewModel)
         
-        window.rootViewController = viewController
+        navigationController = UINavigationController(rootViewController: viewController)
+        
+        window.rootViewController = navigationController
         window.makeKeyAndVisible()
     }
 }

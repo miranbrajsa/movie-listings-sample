@@ -10,7 +10,7 @@ import Foundation
 
 extension MLSAPIService: MovieListingsAPIService {
 
-    func getTrendingMoviesList() -> AnyPublisher<TrendingMoviesResponse, APIError> {
-        return request(with: API.GET.trendingMovies(.day).url, httpMethod: .get)
+    func getTrendingMoviesList(page: Int = 1) -> AnyPublisher<TrendingMoviesResponse, APIError> {
+        return request(with: API.GET.trendingMovies(page: page).url, httpMethod: .get)
     }
 }

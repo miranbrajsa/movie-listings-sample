@@ -20,6 +20,12 @@
 		949D6A432B036EEC006F7F98 /* MLSAPIService+MovieListingsAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949D6A422B036EEC006F7F98 /* MLSAPIService+MovieListingsAPIService.swift */; };
 		949D6A452B037418006F7F98 /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 949D6A442B037418006F7F98 /* Secrets.plist */; };
 		949D6A482B0376A9006F7F98 /* PlistReaderService+Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949D6A472B0376A9006F7F98 /* PlistReaderService+Types.swift */; };
+		949D6A4B2B037C53006F7F98 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 949D6A4A2B037C53006F7F98 /* SnapKit */; };
+		949D6A4D2B037C53006F7F98 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 949D6A4C2B037C53006F7F98 /* SnapKit-Dynamic */; };
+		949D6A502B037C8C006F7F98 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949D6A4F2B037C8C006F7F98 /* UIView+Extensions.swift */; };
+		949D6A532B0380B5006F7F98 /* RappleProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 949D6A522B0380B5006F7F98 /* RappleProgressHUD */; };
+		949D6A562B0380D4006F7F98 /* ActivityIndicatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949D6A552B0380D4006F7F98 /* ActivityIndicatorViewController.swift */; };
+		949D6A582B038347006F7F98 /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949D6A572B038347006F7F98 /* UITableView+Extensions.swift */; };
 		94F1E7182B0360CF0026A0B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F1E7172B0360CF0026A0B2 /* AppDelegate.swift */; };
 		94F1E71C2B0360CF0026A0B2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F1E71B2B0360CF0026A0B2 /* ViewController.swift */; };
 		94F1E7212B0360D10026A0B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94F1E7202B0360D10026A0B2 /* Assets.xcassets */; };
@@ -40,6 +46,9 @@
 		949D6A422B036EEC006F7F98 /* MLSAPIService+MovieListingsAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MLSAPIService+MovieListingsAPIService.swift"; sourceTree = "<group>"; };
 		949D6A442B037418006F7F98 /* Secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
 		949D6A472B0376A9006F7F98 /* PlistReaderService+Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlistReaderService+Types.swift"; sourceTree = "<group>"; };
+		949D6A4F2B037C8C006F7F98 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		949D6A552B0380D4006F7F98 /* ActivityIndicatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorViewController.swift; sourceTree = "<group>"; };
+		949D6A572B038347006F7F98 /* UITableView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
 		94F1E7142B0360CF0026A0B2 /* MovieListingsSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieListingsSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94F1E7172B0360CF0026A0B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		94F1E71B2B0360CF0026A0B2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -53,6 +62,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				949D6A4B2B037C53006F7F98 /* SnapKit in Frameworks */,
+				949D6A4D2B037C53006F7F98 /* SnapKit-Dynamic in Frameworks */,
+				949D6A532B0380B5006F7F98 /* RappleProgressHUD in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,6 +85,7 @@
 		949D6A212B036183006F7F98 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				949D6A4E2B037C81006F7F98 /* Extensions */,
 				949D6A222B03629A006F7F98 /* Services */,
 				949D6A2B2B036495006F7F98 /* ViewControllers */,
 				94F1E7172B0360CF0026A0B2 /* AppDelegate.swift */,
@@ -112,6 +125,7 @@
 		949D6A2B2B036495006F7F98 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				949D6A542B0380C5006F7F98 /* ActivityIndicator */,
 				949D6A2C2B03649E006F7F98 /* MovieListings */,
 			);
 			path = ViewControllers;
@@ -171,6 +185,23 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		949D6A4E2B037C81006F7F98 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				949D6A572B038347006F7F98 /* UITableView+Extensions.swift */,
+				949D6A4F2B037C8C006F7F98 /* UIView+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		949D6A542B0380C5006F7F98 /* ActivityIndicator */ = {
+			isa = PBXGroup;
+			children = (
+				949D6A552B0380D4006F7F98 /* ActivityIndicatorViewController.swift */,
+			);
+			path = ActivityIndicator;
+			sourceTree = "<group>";
+		};
 		94F1E70B2B0360CF0026A0B2 = {
 			isa = PBXGroup;
 			children = (
@@ -212,6 +243,11 @@
 			dependencies = (
 			);
 			name = MovieListingsSample;
+			packageProductDependencies = (
+				949D6A4A2B037C53006F7F98 /* SnapKit */,
+				949D6A4C2B037C53006F7F98 /* SnapKit-Dynamic */,
+				949D6A522B0380B5006F7F98 /* RappleProgressHUD */,
+			);
 			productName = MovieListingsSample;
 			productReference = 94F1E7142B0360CF0026A0B2 /* MovieListingsSample.app */;
 			productType = "com.apple.product-type.application";
@@ -240,6 +276,10 @@
 				Base,
 			);
 			mainGroup = 94F1E70B2B0360CF0026A0B2;
+			packageReferences = (
+				949D6A492B037C53006F7F98 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				949D6A512B0380B5006F7F98 /* XCRemoteSwiftPackageReference "RappleProgressHUD" */,
+			);
 			productRefGroup = 94F1E7152B0360CF0026A0B2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -275,10 +315,13 @@
 				949D6A2E2B0364AF006F7F98 /* MovieListingsViewController.swift in Sources */,
 				949D6A362B036AFC006F7F98 /* MLSAPIService.swift in Sources */,
 				949D6A482B0376A9006F7F98 /* PlistReaderService+Types.swift in Sources */,
+				949D6A582B038347006F7F98 /* UITableView+Extensions.swift in Sources */,
 				949D6A392B036B80006F7F98 /* APIService+Types.swift in Sources */,
+				949D6A562B0380D4006F7F98 /* ActivityIndicatorViewController.swift in Sources */,
 				949D6A3E2B036C46006F7F98 /* TrendingMoviesResponse.swift in Sources */,
 				949D6A282B0363A2006F7F98 /* MLSNavigationService.swift in Sources */,
 				949D6A252B0362CE006F7F98 /* NavigationService.swift in Sources */,
+				949D6A502B037C8C006F7F98 /* UIView+Extensions.swift in Sources */,
 				94F1E7182B0360CF0026A0B2 /* AppDelegate.swift in Sources */,
 				949D6A432B036EEC006F7F98 /* MLSAPIService+MovieListingsAPIService.swift in Sources */,
 			);
@@ -491,6 +534,43 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		949D6A492B037C53006F7F98 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.6.0;
+			};
+		};
+		949D6A512B0380B5006F7F98 /* XCRemoteSwiftPackageReference "RappleProgressHUD" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/rjeprasad/RappleProgressHUD";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		949D6A4A2B037C53006F7F98 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 949D6A492B037C53006F7F98 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		949D6A4C2B037C53006F7F98 /* SnapKit-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 949D6A492B037C53006F7F98 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = "SnapKit-Dynamic";
+		};
+		949D6A522B0380B5006F7F98 /* RappleProgressHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 949D6A512B0380B5006F7F98 /* XCRemoteSwiftPackageReference "RappleProgressHUD" */;
+			productName = RappleProgressHUD;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 94F1E70C2B0360CF0026A0B2 /* Project object */;
 }
